@@ -11,8 +11,16 @@ searchBtn.on('click', function() {
     const APIKey = "1d02bb78f2d95bd338c4738247d99a03"
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     fetch(queryURL)
-    console.log(queryURL)
-})
+    .then(res => res.json())
+    .then(data => {
+        var lon = data.coord.lon
+        var lat = data.coord.lat
+    return (fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey))
+    })
+    .then(response => response.json())
+    .then(forecast => console.log(forecast))
+});
+
 //user story
 // AS A traveler
 // I WANT to see the weather outlook for multiple cities
