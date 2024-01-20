@@ -4,7 +4,7 @@
 
 
 searchBtn = $("#searchBtn")
-
+pickedCity = $("#pickedCity")
 
 searchBtn.on('click', function() {
     city = $("#cityName").val()
@@ -15,11 +15,30 @@ searchBtn.on('click', function() {
     .then(data => {
         var lon = data.coord.lon
         var lat = data.coord.lat
-    return (fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey))
+        let forecastAPI = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial" + "&appid=" + APIKey
+    return fetch(forecastAPI)
     })
     .then(response => response.json())
-    .then(forecast => console.log(forecast))
+    .then(forecast => {
+        console.log(forecast)
+        $("#pickedCity").text(forecast.city.name)
+        $("#todayTemp").text(forecast.list[0].main.temp)
+        $("#todayWind").text(forecast.list[0].wind.speed)
+        $("#todayHumidity").text(forecast.list[0].main.humidity)
+        for (let i = 0; i < 5; i++) {
+            $("#temp" + i).text(forecast.list[i * 7].main.temp)
+            $("#wind" + i).text(forecast.list[i * 7].wind.speed)
+            $("#humidity" + i).text(forecast.list[i * 7].main.humidity)
+            
+        }
+        // generateForecast(forecast)
+})
 });
+
+// function generateForecast() {
+ 
+// }
+
 
 //user story
 // AS A traveler
