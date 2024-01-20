@@ -1,7 +1,8 @@
 // Open Weather API:
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
+Today = dayjs().format('MM/DD/YYYY')
+console.log(Today)
 
 searchBtn = $("#searchBtn")
 pickedCity = $("#pickedCity")
