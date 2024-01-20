@@ -22,7 +22,7 @@ searchBtn.on('click', function() {
     .then(response => response.json())
     .then(forecast => {
         console.log(forecast)
-        $("#pickedCity").text(forecast.city.name)
+        $("#pickedCity").text(forecast.city.name + " " + Today)
         $("#todayTemp").text(forecast.list[0].main.temp)
         $("#todayWind").text(forecast.list[0].wind.speed)
         $("#todayHumidity").text(forecast.list[0].main.humidity)
