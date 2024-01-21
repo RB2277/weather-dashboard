@@ -28,11 +28,13 @@ searchBtn.on('click', function() {
         $("#todayTemp").text(forecast.list[0].main.temp + "°F")
         $("#todayWind").text(forecast.list[0].wind.speed + " " + "MPH")
         $("#todayHumidity").text(forecast.list[0].main.humidity + "" + "%")
+        $("#todayDiv").removeClass("d-none")
         for (let i = 1; i <= 5; i++) {
             $("#temp" + i).text(forecast.list[i * 7].main.temp + "°F")
             $("#wind" + i).text(forecast.list[i * 7].wind.speed + " " + "MPH")
             $("#humidity" + i).text(forecast.list[i * 7].main.humidity + "" + "%")
             $("#day" + i).text(dayjs().add(i, 'day').format('M/DD/YYYY'))
+            $("#day" + i + "Div").removeClass("d-none")
             
         }
         // generateForecast(forecast)
