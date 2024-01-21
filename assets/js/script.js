@@ -1,8 +1,10 @@
 // Open Weather API:
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-Today = dayjs().format('MM/DD/YYYY')
+Today = dayjs().format('M/DD/YYYY')
 console.log(Today)
+Tomorrow = dayjs().format('MM/DD/YYYY')
+console.log(Tomorrow)
 
 searchBtn = $("#searchBtn")
 pickedCity = $("#pickedCity")
@@ -23,13 +25,14 @@ searchBtn.on('click', function() {
     .then(forecast => {
         console.log(forecast)
         $("#pickedCity").text(forecast.city.name + " " + Today)
-        $("#todayTemp").text(forecast.list[0].main.temp)
-        $("#todayWind").text(forecast.list[0].wind.speed)
-        $("#todayHumidity").text(forecast.list[0].main.humidity)
-        for (let i = 0; i < 5; i++) {
-            $("#temp" + i).text(forecast.list[i * 7].main.temp)
-            $("#wind" + i).text(forecast.list[i * 7].wind.speed)
-            $("#humidity" + i).text(forecast.list[i * 7].main.humidity)
+        $("#todayTemp").text(forecast.list[0].main.temp + "°F")
+        $("#todayWind").text(forecast.list[0].wind.speed + " " + "MPH")
+        $("#todayHumidity").text(forecast.list[0].main.humidity + "" + "%")
+        for (let i = 1; i <= 5; i++) {
+            $("#temp" + i).text(forecast.list[i * 7].main.temp + "°F")
+            $("#wind" + i).text(forecast.list[i * 7].wind.speed + " " + "MPH")
+            $("#humidity" + i).text(forecast.list[i * 7].main.humidity + "" + "%")
+            $("#day" + i).text(dayjs().add(i, 'day').format('M/DD/YYYY'))
             
         }
         // generateForecast(forecast)
