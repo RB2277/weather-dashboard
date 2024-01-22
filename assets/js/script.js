@@ -17,7 +17,7 @@ function recentSearches() {
 function generateForecast(city) {
   const APIKey = "1d02bb78f2d95bd338c4738247d99a03";
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
   fetch(queryURL)
     .then((res) => res.json())
     .then((data) => {
@@ -35,7 +35,7 @@ function generateForecast(city) {
       $("#todayHumidity").text(forecast.list[0].main.humidity + "" + "%");
       $("#todayDiv").removeClass("d-none");
       let iconCode = forecast.list[0].weather[0].icon;
-      let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+      let iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
       $("#weatherIconToday").attr("src", iconUrl);
   //Loop that grabs the temp, wind, and humidity for all five of the days and applies that to the HTML
       for (let i = 1; i <= 5; i++) {
@@ -45,7 +45,7 @@ function generateForecast(city) {
         $("#day" + i).text(dayjs().add(i, "day").format("M/DD/YYYY"));
         $("#day" + i + "Div").removeClass("d-none");
         let iconCode = forecast.list[i * 7].weather[0].icon;
-        let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        let iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         $("#weatherIcon" + i).attr("src", iconUrl);
       }
   //Loop that shifts down all of the currently saved storage by 1
