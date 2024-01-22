@@ -2,12 +2,12 @@
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 Today = dayjs().format('M/DD/YYYY')
-
+let priorSearch = localStorage.getItem('City')
 
 searchBtn = $("#searchBtn")
 pickedCity = $("#pickedCity")
 
-searchBtn.on('click', function() {
+function generateForecast(city) {
     city = $("#cityName").val()
     const APIKey = "1d02bb78f2d95bd338c4738247d99a03"
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
@@ -45,9 +45,9 @@ searchBtn.on('click', function() {
             $("#weatherIcon" + i).attr('src', iconUrl)
         }
 })
-});
+};
 
-
+searchBtn.on('click', generateForecast)
 
 
 //Credit to samu101108 on https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon for the Icon code
