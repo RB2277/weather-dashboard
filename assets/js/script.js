@@ -57,9 +57,13 @@ function generateForecast(city) {
           localStorage.setItem("Recent City " + (i + 1), recentCities);
         }
       }
+      if($("#recentSearches button").length >=5) {
+        $("#recentSearches button:last-child").remove()
+      }
+
       let saveCity = forecast.city.name;
       localStorage.setItem("Recent City 1", saveCity);
-      $("#recentSearches").append(`<button type="button" id ="recentSearch" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${saveCity}</button>`);
+      $("#recentSearches").prepend(`<button type="button" id ="recentSearch" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${saveCity}</button>`);
     });
 }
 
