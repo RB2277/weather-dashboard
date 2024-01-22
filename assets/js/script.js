@@ -30,6 +30,10 @@ searchBtn.on('click', function() {
         let iconCode = forecast.list[0].weather[0].icon
         let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         $("#weatherIconToday").attr('src', iconUrl)
+        let saveCity = forecast.city.name
+        localStorage.setItem('City', saveCity)
+        $("#recentSearches").append(`<button class ="cityButton">${saveCity}</button>`)
+
         for (let i = 1; i <= 5; i++) {
             $("#temp" + i).text(forecast.list[i * 7].main.temp + "°F")
             $("#wind" + i).text(forecast.list[i * 7].wind.speed + " " + "MPH")
@@ -39,10 +43,11 @@ searchBtn.on('click', function() {
             let iconCode = forecast.list[i * 7].weather[0].icon
             let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
             $("#weatherIcon" + i).attr('src', iconUrl)
-            
         }
 })
 });
+
+
 
 
 //Credit to samu101108 on https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon for the Icon code
