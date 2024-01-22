@@ -1,10 +1,11 @@
 // Open Weather API:
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+Today = dayjs().format('M/DD/YYYY')
 
 
 searchBtn = $("#searchBtn")
-
+pickedCity = $("#pickedCity")
 
 searchBtn.on('click', function() {
     city = $("#cityName").val()
@@ -15,25 +16,33 @@ searchBtn.on('click', function() {
     .then(data => {
         var lon = data.coord.lon
         var lat = data.coord.lat
-    return (fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey))
+        let forecastAPI = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial" + "&appid=" + APIKey
+    return fetch(forecastAPI)
     })
     .then(response => response.json())
-    .then(forecast => console.log(forecast))
+    .then(forecast => {
+        console.log(forecast)
+        $("#pickedCity").text(forecast.city.name + " " + Today)
+        $("#todayTemp").text(forecast.list[0].main.temp + "°F")
+        $("#todayWind").text(forecast.list[0].wind.speed + " " + "MPH")
+        $("#todayHumidity").text(forecast.list[0].main.humidity + "" + "%")
+        $("#todayDiv").removeClass("d-none")
+        let iconCode = forecast.list[0].weather[0].icon
+        let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        $("#weatherIconToday").attr('src', iconUrl)
+        for (let i = 1; i <= 5; i++) {
+            $("#temp" + i).text(forecast.list[i * 7].main.temp + "°F")
+            $("#wind" + i).text(forecast.list[i * 7].wind.speed + " " + "MPH")
+            $("#humidity" + i).text(forecast.list[i * 7].main.humidity + "" + "%")
+            $("#day" + i).text(dayjs().add(i, 'day').format('M/DD/YYYY'))
+            $("#day" + i + "Div").removeClass("d-none")
+            let iconCode = forecast.list[i * 7].weather[0].icon
+            let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+            $("#weatherIcon" + i).attr('src', iconUrl)
+            
+        }
+})
 });
 
-//user story
-// AS A traveler
-// I WANT to see the weather outlook for multiple cities
-// SO THAT I can plan a trip accordingly
 
-
-//Acceptance Criteria
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
+//Credit to samu101108 on https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon for the Icon code

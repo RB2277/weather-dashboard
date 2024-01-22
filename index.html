@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link type="stylesheet" href="assets/css/style.css" />
+    <link type="stylesheet" href="./assets/css/style.css"/>
   </head>
   <body>
     <header class="container-fluid bg-primary text-light p-3">
@@ -18,7 +18,7 @@
         <h1>Weather Dashboard</h1>
       </div>
     </header>
-
+   <!--Search City-->
     <div class="container-fluid my-3">
       <div class="row">
         <div class="col-md-2">
@@ -28,51 +28,67 @@
             <button type="button" id="searchBtn" class="btn btn-primary btn-lg mt-3 col-10">Search</button>
           </div>
         </div>
-  
-        <div class="col-md-8 d-none">
-          <div class="container-fluid border border-dark">
-          <h2 id="pickedCIty">Atlanta</h2>
-          <p>Temp:<span id="temp"></span></p>
-          <p>Wind:<span id="wind"></span></p>
-          <p>Humidity:<span id="humidity"></span></p>
+   <!--Today's forecast-->
+        <div class="col-md-8">
+          <div id="todayDiv" class="container-fluid border border-dark d-none">
+          <h2 id="pickedCity"></h2>
+          <img src="" alt="" id="weatherIconToday">
+          <p>Temp:<span id="todayTemp"></span></p>
+          <p>Wind:<span id="todayWind"></span></p>
+          <p>Humidity:<span id="todayHumidity"></span></p>
           </div>
           </div>
     </div>
 <div>
-  <div class="row mt-3 d-none">
-    <div class="col-md-2 border border-dark">
-      <h3>9/14/2022</h3>
-      <p>Temp:<span id="temp"></span></p>
-      <p>Wind:<span id="wind"></span></p>
-      <p>Humidity:<span id="humidity"></span></p>
+      <!--Local storage & forecast row-->
+  <div class="row mt-3">
+      <!--Recent cities local storage-->
+    <div class="col-md-2">
     </div>
-    <div class="col-md-2 border border-dark">
-      <h3>9/14/2022</h3>
-      <p>Temp:<span id="temp"></span></p>
-      <p>Wind:<span id="wind"></span></p>
-      <p>Humidity:<span id="humidity"></span></p>
+  <!--Forecast Day 1-->
+    <div id="day1Div" class="col-md-2 border border-dark d-none">
+      <h3 id="day1"></h3>
+      <img src="" alt="" id="weatherIcon1">
+      <p>Temp:<span id="temp1"></span></p>
+      <p>Wind:<span id="wind1"></span></p>
+      <p>Humidity:<span id="humidity1"></span></p>
     </div>
-    <div class="col-md-2 border border-dark">
-      <h3>9/14/2022</h3>
-      <p>Temp:<span id="temp"></span></p>
-      <p>Wind:<span id="wind"></span></p>
-      <p>Humidity:<span id="humidity"></span></p>
+  <!--Forecast Day 2-->
+    <div id="day2Div" class="col-md-2 border border-dark d-none">
+      <h3 id="day2"></h3>
+      <img src="" alt="" id="weatherIcon2">
+      <p>Temp:<span id="temp2"></span></p>
+      <p>Wind:<span id="wind2"></span></p>
+      <p>Humidity:<span id="humidity2"></span></p>
     </div>
-    <div class="col-md-2 border border-dark">
-      <h3>9/14/2022</h3>
-      <p>Temp:<span id="temp"></span></p>
-      <p>Wind:<span id="wind"></span></p>
-      <p>Humidity:<span id="humidity"></span></p>
+      <!--Forecast Day 3-->
+    <div id="day3Div" class="col-md-2 border border-dark d-none">
+      <h3 id="day3"></h3>
+      <img src="" alt="" id="weatherIcon3">
+      <p>Temp:<span id="temp3"></span></p>
+      <p>Wind:<span id="wind3"></span></p>
+      <p>Humidity:<span id="humidity3"></span></p>
     </div>
-    <div class="col-md-2 border border-dark">
-      <h3>9/14/2022</h3>
-      <p>Temp:<span id="temp"></span></p>
-      <p>Wind:<span id="wind"></span></p>
-      <p>Humidity:<span id="humidity"></span></p>
+     <!--Forecast Day 4-->
+    <div id="day4Div" class="col-md-2 border border-dark d-none">
+      <h3 id="day4"></h3>
+      <img src="" alt="" id="weatherIcon4">
+      <p>Temp:<span id="temp4"></span></p>
+      <p>Wind:<span id="wind4"></span></p>
+      <p>Humidity:<span id="humidity4"></span></p>
+    </div>
+      <!--Forecast Day 5-->
+    <div id="day5Div" class="col-md-2 border border-dark d-none">
+      <h3 id="day5"></h3>
+      <img src="" alt="" id="weatherIcon5">
+      <p>Temp:<span id="temp5"></span></p>
+      <p>Wind:<span id="wind5"></span></p>
+      <p>Humidity:<span id="humidity5"></span></p>
     </div>
   </div>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>
