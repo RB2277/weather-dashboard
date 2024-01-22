@@ -4,24 +4,23 @@
 Today = dayjs().format("M/DD/YYYY");
 
 searchBtn = $("#searchBtn");
+recentSearch = $("#recentSearches");
 pickedCity = $("#pickedCity");
 
 function recentSearches() {
   for (let i = 1; i <= 5; i++) {
     let pastSearch = localStorage.getItem("Recent City " + i);
     if (pastSearch != null) {
-      $("#recentSearches").append(
-        `<button type="button" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${pastSearch}</button>`
+      $("#recentSearches").append(`<button type="button" id ="recentSearch" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${pastSearch}</button>`
       );
     }
   }
 }
 
 function generateForecast(city) {
-  city = $("#cityName").val();
   const APIKey = "1d02bb78f2d95bd338c4738247d99a03";
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +  city + "&appid=" + APIKey;
+    "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
   fetch(queryURL)
     .then((res) => res.json())
     .then((data) => {
@@ -60,11 +59,17 @@ function generateForecast(city) {
       }
       let saveCity = forecast.city.name;
       localStorage.setItem("Recent City 1", saveCity);
-      $("#recentSearches").append(`<button type="button" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${saveCity}</button>`);
+      $("#recentSearches").append(`<button type="button" id ="recentSearch" class ="cityButton btn btn-secondary btn-lg btn-block m-2">${saveCity}</button>`);
     });
 }
 
-searchBtn.on("click", generateForecast);
+searchBtn.on("click", function() {
+    generateForecast($("#cityName").val())
+});
+
+recentSearch.on('click', "#recentSearch", function() {
+    generateForecast($(this).text())
+} )
 
 recentSearches();
 //Credit to samu101108 on https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon for the Icon code
