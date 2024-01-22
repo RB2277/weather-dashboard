@@ -2,10 +2,16 @@
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 Today = dayjs().format('M/DD/YYYY')
-let priorSearch = localStorage.getItem('City')
+
 
 searchBtn = $("#searchBtn")
 pickedCity = $("#pickedCity")
+
+function recentSearches() {
+    let pastSearch = localStorage.getItem('City') 
+    $("#recentSearches").append(`<button class ="cityButton">${pastSearch}</button>`)
+}
+recentSearches()
 
 function generateForecast(city) {
     city = $("#cityName").val()
